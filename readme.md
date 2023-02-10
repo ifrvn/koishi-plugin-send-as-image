@@ -10,4 +10,4 @@
 
 若字符无法正常显示，请先在系统中安装相应语言的字体
 
-如有其他需求或问题反馈可前往[Koishi论坛](https://forum.koishi.xyz/)讨论
+如有其他需求或问题反馈可前往[Koishi论坛](https://forum.koishi.xyz/)讨论，或者提交issue
