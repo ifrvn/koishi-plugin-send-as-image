@@ -1,0 +1,39 @@
+{
+  "name": "koishi-plugin-send-as-image",
+  "description": "将文字消息转成图片再发出",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "author": "iFrank <frank@ifrank.cn>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ifrvn/koishi-plugin-send-as-image.git"
+  },
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "koishi": {
+    "description": {
+      "zh": "让Koishi机器人能够将过长的文本消息以图片发出。\n（只会转换纯文本消息）",
+      "en": "Give Koishi the ability to send long text message as image.\n(Only plain text messages are affected.)"
+    },
+    "service": {
+      "required": ["puppeteer"]
+    }
+  },
+  "keywords": [
+    "chatbot",
+    "koishi",
+    "plugin",
+    "image"
+  ],
+  "peerDependencies": {
+    "koishi": "^4.11.5",
+    "koishi-plugin-puppeteer": "^3.4.3"
+  }
+}
