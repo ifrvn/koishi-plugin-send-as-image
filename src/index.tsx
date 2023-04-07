@@ -1,4 +1,4 @@
-import { Context, Element, Schema } from 'koishi'
+import { Context, Element, Schema, Random } from 'koishi'
 import {} from 'koishi-plugin-puppeteer'
 
 export const name = 'send-as-image'
@@ -19,7 +19,16 @@ export const Config: Schema<Config> = Schema.object({
 export function apply(ctx: Context, config: Config) {
   ctx.before('send', async (session) => {
     try {
-      checkElements(session.elements!)
+      traverseElement(session.elements!, ele => {
+        if (!['text', 'template', 'p', 'random'].includes(ele.type)) {
+          throw new Error(`Found inconvertible element type: ${ele.type}, send message as origin.`)
+        }
+        if (ele.type === 'random') {
+          ele.type = 'template'
+          ele.children = [Random.pick(ele.children)]
+        }
+        return ele
+      })
     } catch (error) {
       ctx.logger('send-as-image').debug(error)
       return
@@ -30,19 +39,21 @@ export function apply(ctx: Context, config: Config) {
   }, true)
 }
 
-function checkElements (eles: Element[]) {
-  eles.forEach(ele => {
-    if (!['text', 'template', 'p'].includes(ele.type)) {
-      throw new Error(`Found inconvertible element type: ${ele.type}, send message as origin.`)
+function traverseElement(array: Element[], callback: (element: Element) => Element): Element[] {
+  for (const element of array) {
+    callback(element)
+    if (element.children && element.children.length > 0) {
+      traverseElement(element.children, callback)
     }
-    if (ele.children.length > 0)
-      checkElements(ele.children)
-  })
+  }
+  return array
 }
 
 async function render(ctx: Context, content: string, picWidth: number) {
-  const html = `<html style="width: ${picWidth}px; height: 0; background: 'white'; word-wrap: break-word; white-space: pre-wrap;">
-        <div>${content.replaceAll('\n', '<br>').replaceAll(/<\/*template>/g, '')}</div>
-      </html>`
-  return await ctx.puppeteer.render(html)
+  return await ctx.puppeteer.render(
+    `<html style="width: ${picWidth}px; height: 0; background: 'white'; word-wrap: break-word; white-space: pre-wrap;">
+      <div>${ content.replaceAll(/\r|\n|(\\n)|(\\r)/g, '<br>')
+    .replaceAll(/<\/*template>/g, '')}</div>
+    </html>`
+  )
 }
