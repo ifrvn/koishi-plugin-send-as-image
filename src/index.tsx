@@ -52,7 +52,7 @@ function traverseElement(array: Element[], callback: (element: Element) => Eleme
 async function render(ctx: Context, content: string, picWidth: number) {
   return await ctx.puppeteer.render(
     `<html style="width: ${picWidth}px; height: 0; background: 'white'; word-wrap: break-word; white-space: pre-wrap;">
-      <div>${ content.replaceAll(/\r|\n|(\\n)|(\\r)/g, '<br>')
+      <div>${ content.replaceAll('\n', '<br>')
     .replaceAll(/<\/*template>/g, '')}</div>
     </html>`
   )
