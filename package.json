@@ -1,7 +1,7 @@
 {
   "name": "koishi-plugin-send-as-image",
   "description": "将文字消息转成图片再发出",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -23,7 +23,9 @@
       "en": "Give Koishi the ability to send long text message as image.<br>(Only plain text messages are affected.)"
     },
     "service": {
-      "required": ["puppeteer"]
+      "required": [
+        "puppeteer"
+      ]
     }
   },
   "keywords": [
