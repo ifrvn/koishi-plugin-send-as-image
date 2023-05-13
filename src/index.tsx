@@ -51,9 +51,29 @@ function traverseElement(array: Element[], callback: (element: Element) => Eleme
 
 async function render(ctx: Context, content: string, picWidth: number) {
   return await ctx.puppeteer.render(
-    `<html style="width: ${picWidth}px; height: 0; background: 'white'; word-wrap: break-word; white-space: pre-wrap;">
-      <div style="padding: 10px;">${ content.replaceAll('\n', '<br>')
-    .replaceAll(/<\/*template>/g, '')}</div>
+    `<html>
+    <head>
+      <style>
+        @font-face {
+          font-family: AlibabaPuHuiTi-2-55-Regular;
+          src:url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlibabaPuHuiTi-2/AlibabaPuHuiTi-2-55-Regular/AlibabaPuHuiTi-2-55-Regular.woff2) format('woff2');
+        }
+        html {
+          font-family: 'AlibabaPuHuiTi-2-55-Regular', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+          width: 350px;
+          height: 0;
+          background: white;
+        }
+        p {
+          padding: 10px;
+          word-wrap: break-word;
+          white-space: pre-wrap;
+        }
+      </style>
+    </head>
+    <body>
+      <p>${content.replaceAll(/<\/*template>/g, '')}</p>
+    </body>
     </html>`
   )
 }
