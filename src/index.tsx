@@ -7,12 +7,15 @@ export const using = ['puppeteer', 'logger'] as const
 export interface Config {
   /** 触发转换的消息文本长度 */
   length: number
+  /** 触发转换的消息行数 */
+  line: number
   /** 生成图片的宽度，单位px */
   width: number
 }
 
 export const Config: Schema<Config> = Schema.object({
   length: Schema.number().default(200).description('触发转换的消息文本长度，0则会将所有机器人发出的文本消息都转成图片'),
+  line: Schema.number().default(8).description('触发转换的消息行数'),
   width: Schema.number().default(350).description('生成图片的宽度，单位px（像素）。')
 })
 
@@ -33,7 +36,7 @@ export function apply(ctx: Context, config: Config) {
       ctx.logger('send-as-image').debug(error)
       return
     }
-    if (session.content.length > config.length) {
+    if (session.content.length > config.length || session.content.split('\n').length >= config.line) {
       session.content = await render(ctx, session.content, config.width)
     }
   }, true)
