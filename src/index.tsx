@@ -63,7 +63,7 @@ async function render(ctx: Context, content: string, picWidth: number) {
         }
         html {
           font-family: 'AlibabaPuHuiTi-2-55-Regular', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
-          width: 350px;
+          width: ${picWidth}px;
           height: 0;
           background: white;
         }
