@@ -1,7 +1,7 @@
 {
   "name": "koishi-plugin-send-as-image",
   "description": "将文字消息转成图片再发出",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -19,14 +19,15 @@
   },
   "koishi": {
     "description": {
-      "zh": "让Koishi机器人能够将过长的文本消息以图片发出。<br>（只会转换纯文本消息）",
-      "en": "Give Koishi the ability to send long text message as image.<br>(Only plain text messages are affected.)"
+      "zh": "此插件不再维护，推荐使用更好的<a url=\"https://github.com/koishijs/koishi-plugin-imagify\">imagify</a>。",
+      "en": "This plugin is no longer maintained. <a url=\"https://github.com/koishijs/koishi-plugin-imagify\">imagify</a> would be a good alternative."
     },
     "service": {
       "required": [
         "puppeteer"
       ]
-    }
+    },
+    "deprecated": true
   },
   "keywords": [
     "chatbot",

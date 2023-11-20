@@ -2,6 +2,10 @@
 
 [![npm](https://img.shields.io/npm/v/koishi-plugin-send-as-image?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-send-as-image)
 
+> 此插件不再维护，推荐使用更好的 [imagify](https://github.com/koishijs/koishi-plugin-imagify) 。
+>
+>This plugin is no longer maintained. [imagify](https://github.com/koishijs/koishi-plugin-imagify) would be a good alternative.
+
 将机器人的文字消息转成图片再发出，避免单条消息太长触发风控
 
 只转换纯文本消息，不影响含有其他内容的消息（如@、回复、合并转发等）
